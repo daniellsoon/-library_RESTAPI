@@ -1,44 +1,48 @@
 package com.library.domain;
 
-import lombok.NoArgsConstructor;
-import lombok.NonNull;
-import lombok.RequiredArgsConstructor;
+import lombok.*;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 
-@Entity(name = "USERS")
+@Entity(name = "READERS")
 @NoArgsConstructor
-@RequiredArgsConstructor
-public class User {
+@Getter
+@Setter
+public class Reader {
+
+    public Reader(Long id, String name, String lastName) {
+        this.id = id;
+        this.name = name;
+        this.lastName = lastName;
+        this.singIn = LocalDate.now();
+        this.borrowedBooks = new ArrayList<>();
+    }
 
     @Id
-    @Column(unique = true, name = "ID")
     @GeneratedValue(strategy = GenerationType.AUTO)
-    @NotNull
-    private long id;
+    private Long id;
 
-    @NonNull
     @Column(name = "NAME")
     @NotNull
     private String name;
 
-    @NonNull
     @Column(name = "LASTNAME")
     @NotNull
     private String lastName;
 
     @Column(name = "SING_IN")
     @NotNull
-    private LocalDate singIn = LocalDate.now();
+    private LocalDate singIn;
 
     @OneToMany (
             targetEntity = Borrow.class,
-            mappedBy =  "user",
+            mappedBy =  "reader",
             fetch = FetchType.EAGER,
-            cascade = CascadeType.PERSIST
+            cascade = CascadeType.ALL
     )
     private List<Borrow> borrowedBooks;
 

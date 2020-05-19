@@ -1,8 +1,6 @@
 package com.library.domain;
 
-import lombok.NoArgsConstructor;
-import lombok.NonNull;
-import lombok.RequiredArgsConstructor;
+import lombok.*;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
@@ -10,24 +8,25 @@ import java.time.LocalDate;
 
 @Entity(name = "BORROWS")
 @NoArgsConstructor
-@RequiredArgsConstructor
+@Getter
+@Setter
 public class Borrow {
 
-    @Id
-    @Column(unique = true, name = "ID")
-    @GeneratedValue(strategy =  GenerationType.AUTO)
-    @NotNull
-    private long id;
+    public Borrow(Long id) {
+        this.id = id;
+    }
 
-    @NonNull
+    @Id
+    @GeneratedValue(strategy =  GenerationType.AUTO)
+    private Long id;
+
     @OneToOne(cascade = CascadeType.PERSIST)
     @JoinColumn(name = "BOOK")
-    private Book bookId;
+    private Book book;
 
-    @NonNull
     @ManyToOne(cascade = CascadeType.PERSIST)
     @JoinColumn(name = "USER")
-    private User userId;
+    private Reader reader;
 
     @Column(name = "BORROW_DATE")
     @NotNull

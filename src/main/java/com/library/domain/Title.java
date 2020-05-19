@@ -1,58 +1,47 @@
 package com.library.domain;
 
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.NonNull;
-import lombok.RequiredArgsConstructor;
+import lombok.*;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity(name = "TITLES")
 @NoArgsConstructor
-@RequiredArgsConstructor
 @Getter
+@Setter
 public class Title {
 
-    @Id
-    @Column(unique = true, name = "ID")
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    @NotNull
-    private long id;
+    public Title(Long id, String title, String author, int publicationYear) {
+        this.id = id;
+        this.title = title;
+        this.author = author;
+        this.publicationYear = publicationYear;
+        this.booksInTitle = new ArrayList<>();
+    }
 
-    @NonNull
-    @Column(name = "TITLE")
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private Long id;
+
     @NotNull
+    @Column(name = "TITLE")
     private String title;
 
-    @NonNull
-    @Column(name = "AUTHOR")
     @NotNull
+    @Column(name = "AUTHOR")
     private String author;
 
-    @NonNull
-    @Column(name = "PUB_YEAR")
     @NotNull
-    private Integer publicationYear;
+    @Column(name = "PUB_YEAR")
+    private int publicationYear;
 
-    @OneToMany (
+    @OneToMany(
             targetEntity = Book.class,
-            mappedBy =  "title",
+            mappedBy = "title",
             fetch = FetchType.EAGER,
-            cascade = CascadeType.PERSIST
+            cascade = CascadeType.ALL
     )
-    private List<Book> booksInTitle;
-
-    public void setTitle(String title) {
-        this.title = title;
-    }
-
-    public void setAuthor(String author) {
-        this.author = author;
-    }
-
-    public void setPublicationYear(int publicationYear) {
-        this.publicationYear = publicationYear;
-    }
+    private List<Book> booksInTitle = new ArrayList<>();
 }

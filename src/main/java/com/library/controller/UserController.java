@@ -11,6 +11,6 @@ public class UserController {
 
     @PostMapping(value = "addUser", consumes = APPLICATION_JSON_VALUE)
     public void addUser (@RequestBody UserDto userDto) {
-        System.out.println("User added");
+        System.out.println("Reader added");
     }
 }
