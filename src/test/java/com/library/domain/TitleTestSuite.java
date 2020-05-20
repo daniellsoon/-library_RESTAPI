@@ -102,7 +102,7 @@ public class TitleTestSuite {
         //When
         titleDao.save(title);
         long id = title.getId();
-        title.setTitle("Updated_Title");
+        title.setBookTitle("Updated_Title");
         titleDao.save(title);
 
         List<Title> result = titleDao.findAll();
@@ -110,7 +110,7 @@ public class TitleTestSuite {
 
         //Then
         assertEquals(id, updatedName.getId(), 0);
-        assertEquals("Updated_Title", updatedName.getTitle());
+        assertEquals("Updated_Title", updatedName.getBookTitle());
 
         //CleanUp
         titleDao.deleteById(id);
@@ -120,9 +120,9 @@ public class TitleTestSuite {
     public void testShouldSaveTitleWithBooks() {
         //Given
         Title title = new Title(null, "title_with_products", "author", 2000);
-        Book book1 = new Book(title);
-        Book book2 = new Book(title);
-        Book book3 = new Book(title);
+        Book book1 = new Book(null, title);
+        Book book2 = new Book(null, title);
+        Book book3 = new Book(null, title);
 
         title.getBooksInTitle().add(book1);
         title.getBooksInTitle().add(book2);
@@ -150,47 +150,12 @@ public class TitleTestSuite {
     }
 
     @Test
-    public void testShouldRemoveOneBookFromTitle() {
-        //Given
-        Title title = new Title(null, "title_with_one_products_to_remove", "author", 2000);
-        Book book1 = new Book(title);
-        Book book2 = new Book(title);
-        Book book3 = new Book(title);
-
-        title.getBooksInTitle().add(book1);
-        title.getBooksInTitle().add(book2);
-        title.getBooksInTitle().add(book3);
-
-        //When
-        titleDao.save(title);
-        book1.setTitle(null);
-        bookDao.save(book1);
-        bookDao.delete(book1);
-
-        List<Title> result = titleDao.findAll();
-        List<Book> booksInTitle = bookDao.findAll();
-
-
-        //Then
-        assertEquals(1, result.size());
-        assertEquals(2, booksInTitle.size());
-
-        //CleanUp
-        for (Book book : booksInTitle) {
-            book.setTitle(null);
-            bookDao.save(book);
-            bookDao.delete(book);
-        }
-        titleDao.delete(title);
-    }
-
-    @Test
     public void testShouldRemoveBooksWithTitle() {
         //Given
         Title title = new Title(null, "remove_title_with_products", "author", 2000);
-        Book bookToRemove = new Book(title);
-        Book book2 = new Book(title);
-        Book book3 = new Book(title);
+        Book bookToRemove = new Book(null, title);
+        Book book2 = new Book(null, title);
+        Book book3 = new Book(null, title);
 
         title.getBooksInTitle().add(bookToRemove);
         title.getBooksInTitle().add(book2);

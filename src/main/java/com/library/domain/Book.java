@@ -1,46 +1,36 @@
 package com.library.domain;
 
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.NonNull;
-import lombok.RequiredArgsConstructor;
+import lombok.*;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 
-@Entity
+@Entity(name = "BOOKS")
 @NoArgsConstructor
-@RequiredArgsConstructor
 @Getter
+@Setter
 public class Book {
 
-    @Id
-    @Column(unique =  true)
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    @NotNull
-    private long id;
+    public Book (Long id, Title title) {
+        this.id = id;
+        this.title = title;
+        status = StatusAllowed.OPEN;
+    }
 
-    @NonNull
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private Long id;
+
     @ManyToOne(cascade = CascadeType.PERSIST)
+    @JoinColumn(name = "TITLE")
     private Title title;
 
-    @Column
     @NotNull
-    private StatusAllowed status = StatusAllowed.OPEN;
+    @Column(name = "STATUS")
+    private StatusAllowed status;
 
-    @OneToOne (cascade = CascadeType.PERSIST)
-    @JoinColumn
-    private Borrow borrowId;
+    @OneToOne (cascade = CascadeType.ALL)
+    @JoinColumn(name = "BORROW")
+    private Borrow borrow;
 
-    public void setTitle(Title title) {
-        this.title = title;
-    }
-
-    public void setStatus(StatusAllowed status) {
-        this.status = status;
-    }
-
-    public void setBorrowId(Borrow borrowId) {
-        this.borrowId = borrowId;
-    }
 }

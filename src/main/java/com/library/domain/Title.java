@@ -13,9 +13,9 @@ import java.util.List;
 @Setter
 public class Title {
 
-    public Title(Long id, String title, String author, int publicationYear) {
+    public Title(Long id, String bookTitle, String author, int publicationYear) {
         this.id = id;
-        this.title = title;
+        this.bookTitle = bookTitle;
         this.author = author;
         this.publicationYear = publicationYear;
         this.booksInTitle = new ArrayList<>();
@@ -27,7 +27,7 @@ public class Title {
 
     @NotNull
     @Column(name = "TITLE")
-    private String title;
+    private String bookTitle;
 
     @NotNull
     @Column(name = "AUTHOR")
