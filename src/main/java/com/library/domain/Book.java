@@ -29,7 +29,7 @@ public class Book {
     @Column(name = "STATUS")
     private StatusAllowed status;
 
-    @OneToOne (cascade = CascadeType.ALL)
+    @OneToOne (cascade = CascadeType.ALL, mappedBy = "book")
     @JoinColumn(name = "BORROW")
     private Borrow borrow;
 

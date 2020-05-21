@@ -42,12 +42,14 @@ public class ReaderTestSuite {
     public void testShouldSaveReader() {
         //Given
         Reader reader = new Reader(null, "name_to_save", "lastName");
+
         //When
         readerDao.save(reader);
         long id = reader.getId();
-        Optional<Reader> getUser = readerDao.findById(id);
+        Optional<Reader> getReader = readerDao.findById(id);
+
         //Then
-        assertTrue(getUser.isPresent());
+        assertTrue(getReader.isPresent());
         assertTrue(readerDao.existsById(id));
 
         //CleanUp
@@ -58,10 +60,12 @@ public class ReaderTestSuite {
     public void testShouldDeleteReader() {
         //Given
         Reader reader = new Reader(null, "name_to_delete", "lastName");
+
         //When
         readerDao.save(reader);
         readerDao.delete(reader);
         List<Reader> result = readerDao.findAll();
+
         //Then
         assertEquals(0, result.size());
     }
@@ -72,13 +76,16 @@ public class ReaderTestSuite {
         Reader reader1 = new Reader(null, "name1", "lastName");
         Reader reader2 = new Reader(null, "name2", "lastName");
         Reader reader3 = new Reader(null, "name3", "lastName");
+
         //When
         readerDao.save(reader1);
         readerDao.save(reader2);
         readerDao.save(reader3);
         List<Reader> result = readerDao.findAll();
+
         //Then
         assertEquals(3, result.size());
+
         //CleanUp
         readerDao.deleteAll();
     }
