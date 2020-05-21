@@ -1,6 +1,9 @@
 package com.library.controller;
 
 import com.library.domain.dto.BookDto;
+import com.library.mapper.BookMapper;
+import com.library.service.DbBookService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
@@ -9,19 +12,25 @@ import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
 @RequestMapping("/v1/book")
 public class BookController {
 
+    @Autowired
+    private DbBookService bookService;
+
+    @Autowired
+    private BookMapper bookMapper;
+
     @PostMapping(value = "addBook", consumes = APPLICATION_JSON_VALUE)
     public void addBook(@RequestBody BookDto bookDto) {
-        System.out.println("Book added");
+        bookService.saveBook(bookMapper.mapToBook(bookDto));
     }
 
     @PutMapping(value = "updateStatus")
     public BookDto updateStatus(@RequestBody BookDto bookDto){
-        return new BookDto(1, "Title", "UpdatedStatus");
+        return bookMapper.mapToBookDto(bookService.saveBook(bookMapper.mapToBook(bookDto)));
     }
 
     @GetMapping(value = "availableBooks")
-    public int availableBooks(@RequestBody Long TitleId) {
-        return 5;
+    public int availableBooks(@RequestBody Long titleId) {
+        return bookService.getAvailableBooks(titleId);
     }
 
 

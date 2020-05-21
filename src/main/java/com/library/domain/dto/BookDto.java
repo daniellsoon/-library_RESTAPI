@@ -1,5 +1,7 @@
 package com.library.domain.dto;
 
+import com.library.domain.StatusAllowed;
+import com.library.domain.Title;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -12,7 +14,7 @@ import java.util.List;
 public class BookDto {
 
     private long id;
-    private String title;
-    private String status;
+    private Title title;
+    private StatusAllowed status;
 
 }

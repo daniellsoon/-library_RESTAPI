@@ -145,4 +145,9 @@ public class BookTestSuite {
         long id = title.getId();
         titleDao.deleteById(id);
     }
+
+    @Test
+    public void testShouldReturnListWithStatus() {
+
+    }
 }
