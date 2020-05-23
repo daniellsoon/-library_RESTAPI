@@ -148,6 +148,29 @@ public class BookTestSuite {
 
     @Test
     public void testShouldReturnListWithStatus() {
+        //Given
+        Title title = new Title(null, "title", "author", 2000);
+        Book book1 = new Book(null, title);
+        Book book2 = new Book(null, title);
+        Book book3 = new Book(null, title);
+        Book book4 = new Book(null, title);
 
+        title.getBooksInTitle().add(book1);
+        title.getBooksInTitle().add(book2);
+        title.getBooksInTitle().add(book3);
+        title.getBooksInTitle().add(book4);
+
+        //When
+        book1.setStatus(StatusAllowed.LOST);
+        titleDao.save(title);
+        long id = title.getId();
+        List<Book> bookList = bookDao.findAllByTitleIdAndStatus(id, StatusAllowed.OPEN);
+
+        //Then
+        assertEquals(3,bookList.size());
+        assertEquals(StatusAllowed.OPEN, bookList.get(0).getStatus());
+
+        //CleanUp
+        titleDao.deleteById(id);
     }
 }

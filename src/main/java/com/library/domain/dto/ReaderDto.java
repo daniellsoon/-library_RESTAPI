@@ -10,7 +10,7 @@ import java.time.LocalDate;
 @AllArgsConstructor
 @NoArgsConstructor
 @Getter
-public class UserDto {
+public class ReaderDto {
 
     private long id;
     private String name;

@@ -1,5 +1,7 @@
 package com.library.domain.dto;
 
+import com.library.domain.Book;
+import com.library.domain.Reader;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -12,8 +14,8 @@ import java.time.LocalDate;
 public class BorrowDto {
 
     private long id;
-    private long bookId;
-    private long userId;
+    private Book book;
+    private Reader reader;
     private LocalDate borrowDate;
     private LocalDate returnDate;
 }

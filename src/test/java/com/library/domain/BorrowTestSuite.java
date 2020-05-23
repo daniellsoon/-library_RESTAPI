@@ -94,6 +94,10 @@ public class BorrowTestSuite {
 
         //Then
         assertEquals(LocalDate.of(2020, 1, 20), loadedBorrow.getReturnDate());
+
+        //CleanUp
+        long id = borrow.getId();
+        borrowDao.deleteById(id);
     }
 
     @Test
@@ -153,5 +157,31 @@ public class BorrowTestSuite {
         titleDao.delete(title);
     }
 
+    @Test
+    public void testShouldFindBorrowByBookId() {
+        //Given
+        Borrow borrow1 = new Borrow(null);
+        Borrow borrow2 = new Borrow(null);
+        Title title = new Title(null, "title", "author", 2000);
+        Book book1 = new Book(null, title);
+        Book book2 = new Book(null, title);
 
+        title.getBooksInTitle().add(book1);
+        title.getBooksInTitle().add(book1);
+        borrow1.setBook(book1);
+        borrow2.setBook(book2);
+        book1.setBorrow(borrow1);
+        book2.setBorrow(borrow2);
+
+        //When
+        titleDao.save(title);
+        long bookId = book1.getId();
+        Borrow loadedBorrow = borrowDao.findByBookId(bookId);
+
+        //Then
+        assertEquals(borrow1.getId(), loadedBorrow.getId());
+
+        //CleanUp
+        titleDao.delete(title);
+    }
 }

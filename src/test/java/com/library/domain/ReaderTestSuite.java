@@ -160,5 +160,6 @@ public class ReaderTestSuite {
         //Then
         assertTrue(borrowedBooks.isEmpty());
         assertTrue(result.isEmpty());
+
     }
 }

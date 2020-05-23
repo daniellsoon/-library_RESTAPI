@@ -13,4 +13,7 @@ public interface BorrowDao extends CrudRepository<Borrow, Long> {
 
     @Override
     List<Borrow> findAll();
+
+    Borrow findByBookId(Long bookId);
+
 }
