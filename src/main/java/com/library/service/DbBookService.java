@@ -23,7 +23,7 @@ public class DbBookService {
     }
 
     public int getAvailableBooks(Long titleId) {
-       List<Book> availableBooks = bookDao.findAllByTitleIdAndStatus(titleId, StatusAllowed.OPEN);
-       return availableBooks.size();
+        List<Book> availableBooks = bookDao.findAllByTitleIdAndStatus(titleId, StatusAllowed.OPEN);
+        return availableBooks.size();
     }
 }

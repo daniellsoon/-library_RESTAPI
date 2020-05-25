@@ -1,5 +1,6 @@
 package com.library.controller;
 
+import com.library.controller.exceptions.BorrowNotFoundException;
 import com.library.domain.dto.BorrowDto;
 import com.library.mapper.BorrowMapper;
 import com.library.service.DbBorrowService;
@@ -24,7 +25,7 @@ public class BorrowController {
     }
 
     @PutMapping(value = "returnBook")
-    public void returnBook(@RequestParam Long id) {
+    public void returnBook(@RequestParam Long id) throws BorrowNotFoundException {
         borrowService.returnBook(id);
     }
 }

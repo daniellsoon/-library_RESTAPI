@@ -1,5 +1,6 @@
 package com.library.controller;
 
+import com.library.controller.exceptions.TitleNotFoundException;
 import com.library.domain.dto.BookDto;
 import com.library.mapper.BookMapper;
 import com.library.service.DbBookService;
@@ -28,9 +29,10 @@ public class BookController {
         return bookMapper.mapToBookDto(bookService.saveBook(bookMapper.mapToBook(bookDto)));
     }
 
+    //TitleNotFoundException
     @GetMapping(value = "availableBooks")
-    public int availableBooks(@RequestBody Long titleId) {
-        return bookService.getAvailableBooks(titleId);
+    public int availableBooks(@RequestBody Long titleId) throws TitleNotFoundException {
+            return bookService.getAvailableBooks(titleId);
     }
 
 
