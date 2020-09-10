@@ -2,17 +2,17 @@ package com.library.service;
 
 import com.library.domain.Borrow;
 import com.library.repository.BorrowDao;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 
 import java.time.LocalDate;
-import java.util.List;
 
 @Component
+@RequiredArgsConstructor
 public class DbBorrowService {
 
-    @Autowired
-    private BorrowDao borrowDao;
+
+    private final BorrowDao borrowDao;
 
     public Borrow saveBorrow(Borrow borrow) {
         return borrowDao.save(borrow);

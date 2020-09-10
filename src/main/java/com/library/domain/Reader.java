@@ -9,9 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Entity(name = "READERS")
-@NoArgsConstructor
-@Getter
-@Setter
+@Data
 public class Reader {
 
     public Reader(Long id, String name, String lastName) {

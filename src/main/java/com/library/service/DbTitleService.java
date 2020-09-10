@@ -2,16 +2,16 @@ package com.library.service;
 
 import com.library.domain.Title;
 import com.library.repository.TitleDao;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
 
 @Component
+@RequiredArgsConstructor
 public class DbTitleService {
 
-    @Autowired
-    private TitleDao titleDao;
+    private final TitleDao titleDao;
 
     public List<Title> getAllTitles() {
         return titleDao.findAll();

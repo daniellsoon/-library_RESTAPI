@@ -1,15 +1,12 @@
 package com.library.domain.dto;
 
 import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-
+import lombok.Data;
 
 import java.time.LocalDate;
 
+@Data
 @AllArgsConstructor
-@NoArgsConstructor
-@Getter
 public class ReaderDto {
 
     private long id;

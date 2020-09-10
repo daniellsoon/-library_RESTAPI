@@ -7,9 +7,7 @@ import javax.validation.constraints.NotNull;
 import java.time.LocalDate;
 
 @Entity(name = "BORROWS")
-@NoArgsConstructor
-@Getter
-@Setter
+@Data
 public class Borrow {
 
     public Borrow(Long id) {

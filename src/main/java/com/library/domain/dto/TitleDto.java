@@ -1,12 +1,10 @@
 package com.library.domain.dto;
 
 import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
+import lombok.Data;
 
+@Data
 @AllArgsConstructor
-@NoArgsConstructor
-@Getter
 public class TitleDto {
 
     private long id;

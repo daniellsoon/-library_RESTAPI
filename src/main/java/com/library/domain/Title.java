@@ -8,9 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Entity(name = "TITLES")
-@NoArgsConstructor
-@Getter
-@Setter
+@Data
 public class Title {
 
     public Title(Long id, String bookTitle, String author, int publicationYear) {

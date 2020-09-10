@@ -3,14 +3,12 @@ package com.library.domain.dto;
 import com.library.domain.Book;
 import com.library.domain.Reader;
 import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
+import lombok.Data;
 
 import java.time.LocalDate;
 
+@Data
 @AllArgsConstructor
-@NoArgsConstructor
-@Getter
 public class BorrowDto {
 
     private long id;

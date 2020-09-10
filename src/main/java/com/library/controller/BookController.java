@@ -4,6 +4,7 @@ import com.library.controller.exceptions.TitleNotFoundException;
 import com.library.domain.dto.BookDto;
 import com.library.mapper.BookMapper;
 import com.library.service.DbBookService;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -11,13 +12,11 @@ import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
 
 @RestController
 @RequestMapping("/v1/book")
+@RequiredArgsConstructor
 public class BookController {
 
-    @Autowired
-    private DbBookService bookService;
-
-    @Autowired
-    private BookMapper bookMapper;
+    private final DbBookService bookService;
+    private final BookMapper bookMapper;
 
     @PostMapping(value = "addBook", consumes = APPLICATION_JSON_VALUE)
     public void addBook(@RequestBody BookDto bookDto) {

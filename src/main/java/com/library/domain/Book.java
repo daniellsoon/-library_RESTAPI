@@ -6,9 +6,7 @@ import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 
 @Entity(name = "BOOKS")
-@NoArgsConstructor
-@Getter
-@Setter
+@Data
 public class Book {
 
     public Book (Long id, Title title) {
